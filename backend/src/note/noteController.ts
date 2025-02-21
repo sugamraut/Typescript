@@ -5,6 +5,7 @@ import createHttpError from "http-errors"
 
 const createNote=async(req:Request,res:Response,next:NextFunction)=>{
   try {
+    createHttpError(500,"something went wrong")
     const file=req.file?`http://localhost:${envConfig.port}/${req.file.filename}`:"https://th.bing.com/th?id=OIP.NK7PSAeNgy_ZSUFBPiDdtgHaFl&w=287&h=217&c=8&rs=1&qlt=90&o=6&pid=3.1&rm=2"
     const{title,subtitle,description}=req.body
     if(!title||!subtitle||!description){
@@ -28,3 +29,5 @@ const createNote=async(req:Request,res:Response,next:NextFunction)=>{
     return next(createHttpError(500,"Error while creating"))
   }
 }
+
+export{createNote}
